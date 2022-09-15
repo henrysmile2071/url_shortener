@@ -3,6 +3,7 @@ const app = express()
 const mongoose = require('mongoose')
 mongoose.connect(process.env.MONGODB_URI)
 const db = mongoose.connection
+const URL = require('./models/url')
 db.on('error', () => {
   console.log('DB connection error!')
 })
