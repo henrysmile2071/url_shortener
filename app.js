@@ -5,6 +5,7 @@ const exphbs = require('express-handlebars')
 mongoose.connect(process.env.MONGODB_URI)
 const db = mongoose.connection
 const URL = require('./models/url')
+app.use(express.static('public'))
 db.on('error', () => {
   console.log('DB connection error!')
 })
@@ -16,6 +17,10 @@ app.set('view engine', 'hbs')
 
 app.get('/', (req, res) => {
   res.render('index')
+})
+
+app.get('/shorten', (req, res) => {
+  res.render('result')
 })
 
 app.listen(3000, () => {
