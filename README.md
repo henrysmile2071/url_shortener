@@ -1,6 +1,6 @@
 # URL Shortener
 
-![Index page about URL Shortner](./public/image/snapshot3.png)
+![Index page about URL Shortner](./public/image/snapshot.png)
 
 ## About
 
