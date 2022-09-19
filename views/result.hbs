@@ -1,7 +1,8 @@
 {{!-- result.hbs --}}
 <div class="container d-flex flex-column align-items-center">
-  <h2 class="fw-bold">Success! Please use this link:</h2>
-  <a href="{{this.shortURL}}" class="fs-2">{{this.shortURL}}</a>
+   <h2 class="fw-bold">Success! Please use this link:</h2>
+  <a href="/{{shortURL}}" class="fs-2">http://localhost:3000/{{shortURL}}</a>
   <div>
     <input type="button" data-clipboard-target="#shortenurl" class="btn btn-primary btn-lg my-4" value="Copy URL">
+    <a href="/" class="btn btn-secondary btn-lg my-4">Create another one</a>
   </div>
