@@ -29,8 +29,8 @@ app.get('/', (req, res) => {
 app.post('/shorten', (req, res) => {
   const targetURL = req.body.targetUrl
   const shortURL = newShortUrl()
-  URL.exists({ targetURL })
-    .then(data => data ? URL.findById(data) : URL.create({ targetURL, shortURL }))
+  URL.exists({ targetURL }) //checks if target URL already exists
+    .then(data => data ? URL.findById(data) : URL.create({ targetURL, shortURL })) //if it does find document with returned _ID, else create new entry in database and return new document
     .then(data => {
       res.render('result', { targetURL, shortURL: data.shortURL })})
     .catch(err => console.log(err))
