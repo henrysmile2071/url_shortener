@@ -2,6 +2,8 @@
 
 ![Index page about URL Shortener](./public/images/snapshot.png)
 
+![Result page of URL shortener](./public/images/snapshot2.png)
+
 ## About
 
 Generate a shortened URL from a given URL.
@@ -12,7 +14,7 @@ Generate a shortened URL from a given URL.
 - Shortened URL will redirect to target URL when the server is on.
 - Same target URL will generate the same shortened URL 
 - Checks if target URL is blank
-- (Copy button to let user copy to clipboard) 
+- Copy button to let user copy to clipboard
 
 
 ## Installation

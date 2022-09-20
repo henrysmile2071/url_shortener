@@ -1,11 +1,14 @@
 const express = require('express')
 const app = express()
+const port = process.env.PORT || 3000
 const mongoose = require('mongoose')
 const exphbs = require('express-handlebars')
 mongoose.connect(process.env.MONGODB_URI)
 const db = mongoose.connection
 const URL = require('./models/url')
+const newShortUrl = require('./utility/generate_short_url')
 app.use(express.static('public'))
+
 db.on('error', () => {
   console.log('DB connection error!')
 })
@@ -16,10 +19,13 @@ app.engine('hbs', exphbs.engine({ extname: '.hbs' }))
 app.set('view engine', 'hbs')
 app.use(express.urlencoded({ extended: true }))
 
+//routes
+//index
 app.get('/', (req, res) => {
   res.render('index')
 })
 
+//post target url and return shorturl
 app.post('/shorten', (req, res) => {
   const targetURL = req.body.targetUrl
   const shortURL = newShortUrl()
@@ -30,6 +36,7 @@ app.post('/shorten', (req, res) => {
     .catch(err => console.log(err))
 })
 
+//get target url from shorturl and redirect
 app.get('/:shortURL', (req, res) => {
   const { shortURL } = req.params
   URL.findOne({ shortURL })
@@ -38,25 +45,6 @@ app.get('/:shortURL', (req, res) => {
     .catch(err => console.log(err))
 })
 
-app.listen(3000, () => {
-  console.log(`App is running on http://localhost:3000`)
+app.listen(port, () => {
+  console.log(`App is running on http://localhost:${port}`)
 })
-
-function newShortUrl() {
-  const lowerCaseLetters = 'abcdefghijklmnopqrstuvwxyz'
-  const upperCaseLetters = lowerCaseLetters.toUpperCase()
-  const numbers = '1234567890'
-  let collection = []
-  collection = collection.concat(lowerCaseLetters.split('')).concat(upperCaseLetters.split('')).concat(numbers.split(''))
-  let shortCode = ''
-  for (let i = 0; i < 5; i++) {
-    shortCode += sample(collection)
-  }
-  const shortURL = shortCode
-  return shortURL
-}
-
-function sample(array) {
-  const index = Math.floor(Math.random() * array.length)
-  return array[index]
-}
