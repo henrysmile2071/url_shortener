@@ -27,10 +27,10 @@ Generate a shortened URL from a given URL.
    npm install
    ```
 
-4. Set local evironment constant:
+4. Set local environment constant:
 
    ```bash
-   export MONGODB_URI="mongodb+srv://<your_account>:<your_password>@cluster0.j9qlz5q.mongodb.net/url-shortener?retryWrites=true&w=majority"
+   export MONGODB_URI="mongodb+srv://<account>:<password>@cluster0.gze8tbc.mongodb.net/url-shortener?retryWrites=true&w=majority"
    ```
 
 5. Then：
