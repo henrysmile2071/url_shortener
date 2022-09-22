@@ -3,6 +3,7 @@ const app = express()
 const port = process.env.PORT || 3000
 const mongoose = require('mongoose')
 const exphbs = require('express-handlebars')
+const bodyParser = require('body-parser')
 mongoose.connect(process.env.MONGODB_URI)
 const db = mongoose.connection
 const URL = require('./models/url')
@@ -28,11 +29,12 @@ app.get('/', (req, res) => {
 //post target url and return shorturl
 app.post('/shorten', (req, res) => {
   const targetURL = req.body.targetUrl
-  const shortURL = newShortUrl()
+  const shortURL = newShortUrl(5)
   URL.exists({ targetURL }) //checks if target URL already exists
     .then(data => data ? URL.findById(data) : URL.create({ targetURL, shortURL })) //if it does find document with returned _ID, else create new entry in database and return new document
     .then(data => {
-      res.render('result', { targetURL, shortURL: data.shortURL })})
+      res.render('result', { targetURL, shortURL: data.shortURL })
+    })
     .catch(err => console.log(err))
 })
 
